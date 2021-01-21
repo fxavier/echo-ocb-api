@@ -20,6 +20,10 @@ class UnidadeSanitaria(models.Model):
     nome = models.CharField(max_length=150)
     distrito = models.ForeignKey(Distrito, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Unidade Sanitaria'
+        verbose_name_plural = 'Unidades Sanitarias'
+
     def __str(self):
         return self.nome
 
@@ -30,12 +34,16 @@ class ActaMensalCG(models.Model):
     data_encontro = models.DateField(auto_now=False, auto_now_add=False)
     data_proximo_encontro = models.DateField(
         auto_now=False, auto_now_add=False)
-    num_homens = models.IntegerField()
-    num_mulheres = models.IntegerField()
-    nome_pessoa_facilitador = models.CharField(max_length=150)
+    nparticipantes_homens = models.IntegerField()
+    participantes_mulheres = models.IntegerField()
+    nome_facilitador = models.CharField(max_length=150)
+
+    class Meta:
+        verbose_name = 'Acta Mensal do CG'
+        verbose_name_plural = 'Actas Mensais do CG'
 
     def __str__(self):
-        return self.nome_pessoa_facilitador + " " + self.data_encontro
+        return self.nome_facilitador + " " + self.data_encontro
 
 
 class ResumoMensalVSL(models.Model):
@@ -66,6 +74,10 @@ class ResumoMensalVSL(models.Model):
     membros_maes_feminino = models.IntegerField()
     membros_maes_masculino = models.IntegerField()
 
+    class Meta:
+        verbose_name = 'Resumo Mensal de VSL'
+        verbose_name_plural = 'Resumos Mensais de VSL'
+
     def __str__(self):
         return self.nome_pessoa_facilitador + " " + self.data_inicial
 
@@ -92,6 +104,10 @@ class DialogoComunitario(models.Model):
     referido = models.IntegerField()
     testagem = models.IntegerField()
     outros_servicos = models.IntegerField()
+
+    class Meta:
+        verbose_name = 'Dialogo Comunitario'
+        verbose_name_plural = 'Dialogos Comunitarios'
 
     def __str(self):
         return self.nome_facilitador + " " + self.data_inicial
@@ -120,5 +136,25 @@ class ProgramaRadio(models.Model):
     literacia_tarv_database = models.IntegerField()
     literacia_tarv_obs = models.IntegerField()
 
+    class Meta:
+        verbose_name = 'Programa da Radio'
+        verbose_name_plural = 'Programas da Radio'
+
     def __str__(self):
         return self.supervisor_cbo + " " + self.data_inicio
+
+
+class ActaMensalCS(models.Model):
+    data_encontro = models.DateField(auto_now=False, auto_now_add=False)
+    data_proximo_encontro = models.DateField(
+        auto_now=False, auto_now_add=False)
+    participantes_homens = models.IntegerField()
+    participantes_mulheres = models.IntegerField()
+    nome_facilitador = models.CharField(max_length=150)
+
+    class Meta:
+        verbose_name = 'Acta Mensal do CS'
+        verbose_name_plural = 'Actas Mensais do CS'
+
+    def __str(self):
+        return self.nome_facilitador + " " + self.data_encontro
