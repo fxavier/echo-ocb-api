@@ -12,7 +12,7 @@ class Distrito(models.Model):
     nome = models.CharField(max_length=150)
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
 
-    def __str(self):
+    def __str__(self):
         return self.nome
 
 
@@ -24,7 +24,7 @@ class UnidadeSanitaria(models.Model):
         verbose_name = 'Unidade Sanitaria'
         verbose_name_plural = 'Unidades Sanitarias'
 
-    def __str(self):
+    def __str__(self):
         return self.nome
 
 
@@ -43,7 +43,7 @@ class ActaMensalCG(models.Model):
         verbose_name_plural = 'Actas Mensais do CG'
 
     def __str__(self):
-        return self.nome_facilitador + " " + self.data_encontro
+        return self.nome_facilitador
 
 
 class ResumoMensalVSL(models.Model):
@@ -79,7 +79,7 @@ class ResumoMensalVSL(models.Model):
         verbose_name_plural = 'Resumos Mensais de VSL'
 
     def __str__(self):
-        return self.nome_pessoa_facilitador + " " + self.data_inicial
+        return self.nome_pessoa_facilitador
 
 
 class DialogoComunitario(models.Model):
@@ -110,10 +110,12 @@ class DialogoComunitario(models.Model):
         verbose_name_plural = 'Dialogos Comunitarios'
 
     def __str(self):
-        return self.nome_facilitador + " " + self.data_inicial
+        return self.nome_facilitador
 
 
 class ProgramaRadio(models.Model):
+    unidade_sanitaria = models.ForeignKey(
+        UnidadeSanitaria, on_delete=models.CASCADE)
     supervisor_cbo = models.CharField(max_length=150)
     nome_radio_comunitaria = models.CharField(max_length=150)
     data_inicio = models.DateField(auto_now=False, auto_now_add=False)
@@ -141,10 +143,12 @@ class ProgramaRadio(models.Model):
         verbose_name_plural = 'Programas da Radio'
 
     def __str__(self):
-        return self.supervisor_cbo + " " + self.data_inicio
+        return self.supervisor_cbo
 
 
 class ActaMensalCS(models.Model):
+    unidade_sanitaria = models.ForeignKey(
+        UnidadeSanitaria, on_delete=models.CASCADE)
     data_encontro = models.DateField(auto_now=False, auto_now_add=False)
     data_proximo_encontro = models.DateField(
         auto_now=False, auto_now_add=False)
@@ -156,5 +160,5 @@ class ActaMensalCS(models.Model):
         verbose_name = 'Acta Mensal do CS'
         verbose_name_plural = 'Actas Mensais do CS'
 
-    def __str(self):
-        return self.nome_facilitador + " " + self.data_encontro
+    def __str__(self):
+        return self.nome_facilitador
