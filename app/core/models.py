@@ -29,12 +29,13 @@ class UnidadeSanitaria(models.Model):
 
 
 class ActaMensalCG(models.Model):
+    provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
+    distrito = models.ForeignKey(Distrito, on_delete=models.CASCADE)
     unidade_sanitaria = models.ForeignKey(
         UnidadeSanitaria, on_delete=models.CASCADE)
     data_encontro = models.DateField(auto_now=False, auto_now_add=False)
-    data_proximo_encontro = models.DateField(
-        auto_now=False, auto_now_add=False)
-    nparticipantes_homens = models.IntegerField()
+    data_proximo_encontro = models.DateField()
+    participantes_homens = models.IntegerField()
     participantes_mulheres = models.IntegerField()
     nome_facilitador = models.CharField(max_length=150)
 
@@ -47,6 +48,8 @@ class ActaMensalCG(models.Model):
 
 
 class ResumoMensalVSL(models.Model):
+    provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
+    distrito = models.ForeignKey(Distrito, on_delete=models.CASCADE)
     unidade_sanitaria = models.ForeignKey(
         UnidadeSanitaria, on_delete=models.CASCADE)
     nome_pessoa_facilitador = models.CharField(max_length=150)
@@ -83,6 +86,8 @@ class ResumoMensalVSL(models.Model):
 
 
 class DialogoComunitario(models.Model):
+    provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
+    distrito = models.ForeignKey(Distrito, on_delete=models.CASCADE)
     unidade_sanitaria = models.ForeignKey(
         UnidadeSanitaria, on_delete=models.CASCADE)
     nome_facilitador = models.CharField(max_length=150)
@@ -92,12 +97,8 @@ class DialogoComunitario(models.Model):
     grupos_novos_mes = models.IntegerField()
     grupos_encerram_ciclo = models.IntegerField()
     participantes_fem_20_24 = models.IntegerField()
-    participantes_fem_20_24 = models.IntegerField()
     participantes_fem_25_plus = models.IntegerField()
     participantes_fem_15_19 = models.IntegerField()
-    participantes_masc_20_24 = models.IntegerField()
-    participantes_masc_25_plus = models.IntegerField()
-    participantes_masc_20_24 = models.IntegerField()
     participantes_masc_20_24 = models.IntegerField()
     participantes_masc_25_plus = models.IntegerField()
     participantes_masc_15_19 = models.IntegerField()
@@ -114,6 +115,8 @@ class DialogoComunitario(models.Model):
 
 
 class ProgramaRadio(models.Model):
+    provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
+    distrito = models.ForeignKey(Distrito, on_delete=models.CASCADE)
     unidade_sanitaria = models.ForeignKey(
         UnidadeSanitaria, on_delete=models.CASCADE)
     supervisor_cbo = models.CharField(max_length=150)
@@ -147,14 +150,15 @@ class ProgramaRadio(models.Model):
 
 
 class ActaMensalCS(models.Model):
+    provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
+    distrito = models.ForeignKey(Distrito, on_delete=models.CASCADE)
     unidade_sanitaria = models.ForeignKey(
         UnidadeSanitaria, on_delete=models.CASCADE)
-    data_encontro = models.DateField(auto_now=False, auto_now_add=False)
-    data_proximo_encontro = models.DateField(
-        auto_now=False, auto_now_add=False)
-    participantes_homens = models.IntegerField()
-    participantes_mulheres = models.IntegerField()
-    nome_facilitador = models.CharField(max_length=150)
+    data_encontro = models.DateField(blank=True, null=True)
+    data_proximo_encontro = models.DateField(blank=True, null=True)
+    participantes_homens = models.IntegerField(blank=True, null=True)
+    participantes_mulheres = models.IntegerField(blank=True, null=True)
+    nome_facilitador = models.CharField(max_length=150, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Acta Mensal do CS'
